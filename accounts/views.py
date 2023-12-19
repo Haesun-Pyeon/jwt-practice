@@ -1,10 +1,15 @@
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
+from rest_framework import generics
+from .serializers import UserSerializer
+from django.contrib.auth import get_user_model
+from rest_framework import permissions
 
+User = get_user_model()
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def mypage(request):
-    content = {'message': f'반갑습니다, {str(request.user)}님!'}
-    return Response(content)
+class UserCreateView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.AllowAny]
+
+class UserDetailView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

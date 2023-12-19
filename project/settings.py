@@ -133,7 +133,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'accounts.User'
 
 # dj-rest-auth
 REST_USE_JWT = True  # JWT 사용 여부
@@ -142,12 +142,14 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'  # Refresh Token Cookie Key 값
 
 # django-allauth
 SITE_ID = 1  # 해당 도메인 id
-ACCOUNT_UNIQUE_EMAIL = True  # User email unique 사용 여부
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None  # 사용자 이름 필드 지정
-ACCOUNT_USERNAME_REQUIRED = False  # User username 필수 여부
-ACCOUNT_EMAIL_REQUIRED = True  # User email 필수 여부
-ACCOUNT_AUTHENTICATION_METHOD = 'email'  # 로그인 인증 수단
 ACCOUNT_EMAIL_VERIFICATION = 'none'  # email 인증 필수 여부
+
+# 이메일을 ID로 쓸거 아니면 아래 주석들은 안써도 됨 (안쓰면 username을 ID처럼 씀)
+# ACCOUNT_UNIQUE_EMAIL = True  # User email unique 사용 여부
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None  # 사용자 이름 필드 지정
+# ACCOUNT_USERNAME_REQUIRED = False  # User username 필수 여부
+# ACCOUNT_EMAIL_REQUIRED = True  # User email 필수 여부
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'  # 로그인 인증 수단
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # AccessToken 유효 기간 설정
